@@ -31,6 +31,51 @@ body {
   filter: blur(0.1vmin);
 }
 
+.love-message {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: 100%;
+  max-width: 900px;
+  padding: 24px 16px 0;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 500;
+  font-size: clamp(16px, 2.4vw, 24px);
+  line-height: 1.6;
+  text-align: center;
+  color: #d8b4fe;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.9), 0 0 10px rgba(216, 180, 254, 0.45);
+  pointer-events: none;
+
+  &__timer {
+    font-weight: 600;
+    color: #e9d5ff;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__caret {
+    display: inline-block;
+    width: 2px;
+    height: 1.1em;
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    background-color: #d8b4fe;
+    animation: caret-blink 1s steps(1) infinite;
+
+    &--done {
+      animation: caret-blink 1s steps(1) 3 forwards;
+    }
+  }
+}
+
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
 .flowers {
   position: relative;
   transform: scale(0.9);
