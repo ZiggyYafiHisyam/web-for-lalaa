@@ -2,9 +2,9 @@
 const START = new Date("2025-08-28T11:16:00+07:00");
 
 const MESSAGE = [
-  "happy 28th of the month my love, we have been together for ",
+  "happy 28th of the month, my love\nwe have been together for:\n",
   { timer: true },
-  ". i hope our love becomes eternal and this timer never dies. i love u too much bubuu 💜",
+  "\n\ni hope our love becomes eternal and this timer never dies...\ni love you too much bubuu 💜",
 ];
 
 const TYPE_SPEED = 70; // ms per character
@@ -53,7 +53,38 @@ const typeMessage = (el) => {
   next();
 };
 
+// Browsers block sound until the visitor interacts, so the first tap
+// anywhere starts the music and the button toggles it afterwards
+const setupMusic = () => {
+  const audio = document.querySelector(".music");
+  const button = document.querySelector(".music-toggle");
+
+  const render = () => {
+    const playing = !audio.paused;
+    button.textContent = playing ? "music on 🎵" : "tap for music 🎵";
+    button.classList.toggle("music-toggle--playing", playing);
+  };
+
+  const play = () => audio.play().then(render).catch(render);
+
+  audio.addEventListener("play", render);
+  audio.addEventListener("pause", render);
+
+  button.addEventListener("click", (e) => {
+    e.stopPropagation();
+    audio.paused ? play() : audio.pause();
+  });
+
+  document.addEventListener("pointerdown", (e) => {
+    if (!button.contains(e.target) && audio.paused && audio.currentTime === 0) play();
+  });
+
+  play(); // works only where autoplay is allowed
+};
+
 onload = () => {
+    setupMusic();
+
     const c = setTimeout(() => {
       document.body.classList.remove("not-loaded");
       clearTimeout(c);
