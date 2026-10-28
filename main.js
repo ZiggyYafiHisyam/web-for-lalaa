@@ -1,5 +1,5 @@
-// Together since 28 August 2025, 11:16 AM (viewer's local time)
-const START = new Date(2025, 7, 28, 11, 16, 0);
+// Together since 28 August 2025, 11:16 AM WIB (Jakarta, UTC+7)
+const START = new Date("2025-08-28T11:16:00+07:00");
 
 const MESSAGE = [
   "happy 28th of the month my love, we have been together for ",
